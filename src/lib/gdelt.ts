@@ -30,12 +30,15 @@ export async function fetchGdeltDocs(params?: {
   const api = process.env.GDELT_DOC_API || DEFAULT_API;
   const query = params?.query || '(Trump OR "Donald Trump" OR "Trump administration") sourcelang:english';
   const timespan = params?.timespan || "3h";
-  const maxrecords = params?.maxrecords ?? 75;
+  const maxrecords = params?.maxrecords ?? 25;
   const url = `${api}?query=${encodeURIComponent(query)}&mode=ArtList&maxrecords=${maxrecords}&timespan=${timespan}&sort=DateDesc&format=json`;
 
   const res = await fetch(url, {
     headers: { "user-agent": "THE-RECORD-archive/1.0" },
   });
+  if (res.status === 429) {
+    return [];
+  }
   if (!res.ok) {
     throw new Error(`GDELT ${res.status}`);
   }

@@ -1,5 +1,6 @@
 import { getServiceClient } from "./supabase";
 import { fetchGdeltDocs } from "./gdelt";
+import { fetchRssDocs } from "./rss";
 import { classifyArticle } from "./classify";
 import {
   domainFromUrl,
@@ -39,14 +40,22 @@ export async function ingestLatestNews(opts?: { timespan?: string }): Promise<In
     .select()
     .single();
 
-  let docs;
+  let docs = [];
   try {
-    docs = await fetchGdeltDocs({ timespan: opts?.timespan || "3h", maxrecords: 75 });
+    docs = await fetchGdeltDocs({ timespan: opts?.timespan || "24h", maxrecords: 25 });
   } catch (err) {
-    const msg = err instanceof Error ? err.message : "GDELT fetch failed";
-    summary.errors.push(msg);
+    summary.errors.push(err instanceof Error ? err.message : "GDELT fetch failed");
+  }
+  if (!docs.length) {
+    try {
+      docs = await fetchRssDocs();
+    } catch (err) {
+      summary.errors.push(err instanceof Error ? err.message : "RSS fetch failed");
+    }
+  }
+  if (!docs.length) {
     if (run?.id) {
-      await supabase.from("ingestion_runs").update({ status: "failed", errors: summary.errors, finished_at: new Date().toISOString() }).eq("id", run.id);
+      await supabase.from("ingestion_runs").update({ status: "partial", errors: summary.errors, finished_at: new Date().toISOString(), records_found: 0 }).eq("id", run.id);
     }
     return summary;
   }
