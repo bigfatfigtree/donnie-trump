@@ -133,7 +133,8 @@ export async function getLatestPolling(): Promise<PollingMetric> {
     .order("fetched_at", { ascending: false })
     .limit(1)
     .maybeSingle();
-  if (!data || data.status === "unavailable") return { ...SEED_POLLING, status: data?.status || "unavailable" };
+  if (!data) return SEED_POLLING;
+  if (data.status === "unavailable") return { ...SEED_POLLING, status: "unavailable" };
   return {
     id: data.id,
     pollster: data.pollster,
