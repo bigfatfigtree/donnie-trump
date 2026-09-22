@@ -5,10 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --paper: #f7f4ef;
+  --paper: #f6f5f2;
   --ink: #121212;
-  --ink-muted: #3d3d3d;
-  --rule: #c8c2b8;
+  --ink-muted: #5b5752;
+  --rule: #e4e0d8;
   --accent: #8a5a00; /* gilt, used sparingly */
   --surface: #ffffff;
   --surface-dark: #1a1a1a;
