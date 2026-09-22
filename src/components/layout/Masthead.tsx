@@ -12,7 +12,7 @@ export function Masthead() {
           </Link>
           <div className="hidden sm:flex items-center gap-3 text-[11px] uppercase tracking-[0.16em] text-[var(--ink-muted)]">
             <span className="h-3 w-px bg-[var(--rule)]" />
-            <span title="Also this site">diaperdon.com</span>
+            <span title="Also this site">diaperdon.co</span>
             <span className="h-3 w-px bg-[var(--rule)]" />
             <span title="Also this site">trumpratings.com</span>
           </div>
