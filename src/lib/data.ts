@@ -93,13 +93,29 @@ export async function getArchiveArticles(filters: {
 export async function getArchiveCounts() {
   const supabase = getAnonClient();
   if (!supabase || !isSupabaseConfigured()) return SEED_ARCHIVE_COUNT;
-  const { data, error } = await supabase.from("v_archive_counts").select("*").maybeSingle();
-  if (error || !data) return SEED_ARCHIVE_COUNT;
+
+  const sinceDay = new Date();
+  sinceDay.setHours(0, 0, 0, 0);
+  const sinceWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const sinceMonth = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+
+  const base = () =>
+    supabase.from("articles").select("id", { count: "exact", head: true }).eq("qualification", "QUALIFY");
+
+  const [totalRes, todayRes, weekRes, monthRes] = await Promise.all([
+    base(),
+    base().gte("published_at", sinceDay.toISOString()),
+    base().gte("published_at", sinceWeek.toISOString()),
+    base().gte("published_at", sinceMonth.toISOString()),
+  ]);
+
+  const total = totalRes.count ?? 0;
+  if (totalRes.error) return SEED_ARCHIVE_COUNT;
   return {
-    total: Number(data.total_qualified || 0),
-    today: Number(data.today || 0),
-    thisWeek: Number(data.this_week || 0),
-    thisMonth: Number(data.this_month || 0),
+    total,
+    today: todayRes.count ?? 0,
+    thisWeek: weekRes.count ?? 0,
+    thisMonth: monthRes.count ?? 0,
   };
 }
 
