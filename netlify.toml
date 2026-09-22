@@ -1,0 +1,22 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions."news-ingest"]
+  schedule = "@hourly"
+
+[functions."polling-refresh"]
+  schedule = "0 */6 * * *"
+
+[functions."treasury-refresh"]
+  schedule = "0 18 * * 1-5"
+
+[functions."eia-bls-check"]
+  schedule = "@daily"

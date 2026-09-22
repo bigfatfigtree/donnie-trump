@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper: #f7f4ef;
+  --ink: #121212;
+  --ink-muted: #3d3d3d;
+  --rule: #c8c2b8;
+  --accent: #8a5a00; /* gilt, used sparingly */
+  --surface: #ffffff;
+  --surface-dark: #1a1a1a;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+}
+
+.font-sans {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Editorial rules */
+.editorial-rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.editorial-rule-thick {
+  border: none;
+  border-top: 2px solid var(--ink);
+  margin: 0;
+}
+
+/* Oversized numerals for data */
+.numeral {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Metadata style */
+.meta {
+  @apply text-[11px] uppercase tracking-[0.12em] font-medium text-[var(--ink-muted)];
+}
+
+/* Article type badges */
+.badge-news { @apply bg-neutral-200 text-neutral-800; }
+.badge-analysis { @apply bg-amber-100 text-amber-900; }
+.badge-opinion { @apply bg-violet-100 text-violet-900; }
+.badge-editorial { @apply bg-rose-100 text-rose-900; }
+.badge-factcheck { @apply bg-emerald-100 text-emerald-900; }
+.badge-investigation { @apply bg-sky-100 text-sky-900; }
+.badge-legal { @apply bg-orange-100 text-orange-900; }
+
+/* Smooth number transitions */
+@keyframes count-up {
+  from { opacity: 0.4; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: count-up 0.6s ease-out;
+}
+
+/* Magazine grid helpers */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem 1.25rem;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
