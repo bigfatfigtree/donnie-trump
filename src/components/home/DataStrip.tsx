@@ -153,7 +153,7 @@ export function DataStrip({ polling, debt, gas, groceries, archiveCount = SEED_A
               </div>
               <p className="mt-1 text-[11px] text-[var(--ink-muted)]">
                 <a
-                  href={gas.source_url}
+                  href={gas.source_url || "https://www.eia.gov/petroleum/gasdiesel/"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-[var(--ink)]"
@@ -188,7 +188,7 @@ export function DataStrip({ polling, debt, gas, groceries, archiveCount = SEED_A
               </div>
               <p className="mt-1 text-[11px] text-[var(--ink-muted)]">
                 <a
-                  href={groceries.source_url}
+                  href={groceries.source_url || "https://www.bls.gov/cpi/"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-[var(--ink)]"
