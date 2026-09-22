@@ -1,7 +1,7 @@
-import { getServiceClient } from "@/lib/supabase";
-import { fetchLatestDebt } from "@/lib/providers/treasury";
-import { fetchRegularGasoline } from "@/lib/providers/eia";
-import { fetchFoodAtHomeCpi } from "@/lib/providers/bls";
+import { getServiceClient } from "./supabase";
+import { fetchLatestDebt } from "./providers/treasury";
+import { fetchRegularGasoline } from "./providers/eia";
+import { fetchFoodAtHomeCpi } from "./providers/bls";
 
 export async function refreshTreasury() {
   const supabase = getServiceClient();

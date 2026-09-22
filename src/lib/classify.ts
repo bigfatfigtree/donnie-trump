@@ -1,4 +1,4 @@
-import type { ArticleType, Qualification } from "@/types";
+import type { ArticleType, Qualification } from "../types";
 
 export interface ClassificationInput {
   headline: string;

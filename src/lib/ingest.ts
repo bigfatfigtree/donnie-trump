@@ -1,6 +1,6 @@
-import { getServiceClient } from "@/lib/supabase";
-import { fetchGdeltDocs } from "@/lib/gdelt";
-import { classifyArticle } from "@/lib/classify";
+import { getServiceClient } from "./supabase";
+import { fetchGdeltDocs } from "./gdelt";
+import { classifyArticle } from "./classify";
 import {
   domainFromUrl,
   jaccard,
@@ -9,7 +9,7 @@ import {
   publisherNameFromDomain,
   slugify,
   tokenSet,
-} from "@/lib/normalize";
+} from "./normalize";
 
 export interface IngestSummary {
   found: number;
