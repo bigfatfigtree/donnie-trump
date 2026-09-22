@@ -1,5 +1,5 @@
 import { getServiceClient } from "./supabase";
-import { fetchGdeltDocs } from "./gdelt";
+import { fetchGdeltDocs, type GdeltDoc } from "./gdelt";
 import { fetchRssDocs } from "./rss";
 import { classifyArticle } from "./classify";
 import {
@@ -40,7 +40,7 @@ export async function ingestLatestNews(opts?: { timespan?: string }): Promise<In
     .select()
     .single();
 
-  let docs = [];
+  let docs: GdeltDoc[] = [];
   try {
     docs = await fetchGdeltDocs({ timespan: opts?.timespan || "24h", maxrecords: 25 });
   } catch (err) {
