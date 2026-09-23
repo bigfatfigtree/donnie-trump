@@ -18,6 +18,7 @@ export function Masthead() {
           </div>
         </div>
         <nav className="flex items-center gap-5 text-[12px] uppercase tracking-[0.14em] text-[var(--ink-muted)] shrink-0">
+          <Link href="/ratings" className="hover:text-[var(--ink)]">Ratings</Link>
           <Link href="/archive" className="hover:text-[var(--ink)]">Archive</Link>
           <Link href="/methodology" className="hover:text-[var(--ink)]">Method</Link>
         </nav>
