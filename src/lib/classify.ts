@@ -105,12 +105,12 @@ export function classifyByRules(input: ClassificationInput): ClassificationResul
   }
 
   return {
-    qualification: "REVIEW",
-    confidence: 0.45,
-    reason: "Subject present but classification is borderline; queued for human review.",
+    qualification: "QUALIFY",
+    confidence: 0.72,
+    reason: "Trump-related published coverage auto-archived without review.",
     articleType,
     categories,
-    model: "rules-v1",
+    model: "rules-v2-auto",
   };
 }
 
